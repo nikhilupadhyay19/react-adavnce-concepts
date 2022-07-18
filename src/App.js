@@ -5,7 +5,7 @@ import './style.css';
 export default function App() {
   return (
     <div>
-      <ProductPage />
+      <ProductPage name="Product Page" id="productPage" />
     </div>
   );
 }

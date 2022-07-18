@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Product from '../../components/Product/Product';
+import { SelectBox } from '../../components/SelectBox/SelectBox';
 
 const TIMEOUT = 10;
 
@@ -50,7 +51,7 @@ const ProductPage = (props) => {
     setProducts(cProducts);
   };
 
-  const continents = products
+  const pRegions = products
     .map((el) => el.continents[0])
     .reduce((acc, el) => {
       if (acc.indexOf(el) === -1) {
@@ -66,10 +67,10 @@ const ProductPage = (props) => {
       return 0;
     });
 
-  console.log(continents);
   return (
     <div className="product-page" id={id}>
       <h1>Welcome to the {name}...</h1>
+      <SelectBox data={pRegions} />
       {isLoading ? (
         <p>Please wait while the products has beem loaded....</p>
       ) : (

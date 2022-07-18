@@ -1,11 +1,11 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import ProductPage from './pages/ProductPage/ProductPage';
+import './style.css';
 
 export default function App() {
   return (
     <div>
-      <h1>Hello StackBlitz!</h1>
-      <p>Start editing to see some magic happen :)</p>
+      <ProductPage />
     </div>
   );
 }

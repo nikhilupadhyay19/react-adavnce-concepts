@@ -11,8 +11,8 @@ const Product = (props) => {
               <div className="card-body">{el.name.common}</div>
               <button
                 type="button"
-                class="btn btn-warning"
-                onClick={showdetailsHandler}
+                className="btn btn-warning"
+                onClick={() => showdetailsHandler(el.cca3)}
               >
                 Show Details...
               </button>

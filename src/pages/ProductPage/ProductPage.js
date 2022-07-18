@@ -9,6 +9,8 @@ const ProductPage = (props) => {
 
   const { name, id } = props;
 
+  console.log('Contructor ..... Rum only once at mounting pahse...');
+
   const timeout = (s) => {
     return new Promise((_, reject) => {
       setTimeout(() => {
@@ -30,28 +32,38 @@ const ProductPage = (props) => {
     }
   };
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const products = await getJSON('https://restcountries.com/v3.1/all');
-        setProducts((prevState) => {
-          return (prevState = products);
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   console.log(
+  //     'Component Did Mount.... Contain blank array array as dependency... Run only once...'
+  //   );
+  //   const getProducts = async () => {
+  //     try {
+  //       const products = await getJSON('https://restcountries.com/v3.1/all');
+  //       setProducts((prevState) => {
+  //         return (prevState = products);
+  //       });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getProducts();
+  // }, []);
 
-  useEffect(() => {
-    console.log('componentDidUpdate');
-    setIsLoading(!isLoading);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(
+  //     'Component Did update... Contain array with dependency... run only when there is a change in the dependency..'
+  //   );
+  //   setIsLoading(!isLoading);
+  // }, [products]);
 
-  const showdetailsHandler = () => {
-    console.log('Click Event Occured', this);
+  const showdetailsHandler = (id) => {
+    const cProducts = [...products];
+    const index = cProducts.findIndex((el) => el.cca3 === id);
+    cProducts.splice(index, 1);
+    setProducts(cProducts);
   };
+
+  console.log('Render...');
 
   return (
     <div className="product-page" id={id}>

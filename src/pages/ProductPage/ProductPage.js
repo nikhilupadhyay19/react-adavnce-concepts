@@ -5,12 +5,10 @@ const TIMEOUT = 10;
 
 const ProductPage = (props) => {
   const [products, setProducts] = useState([]);
-  const [cProducts, setCProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  // const [uProducts, setUProducts] = useState([]);
 
   const { name, id } = props;
-
-  // console.log('Contructor ..... Rum only once at mounting pahse...');
 
   const timeout = (s) => {
     return new Promise((_, reject) => {
@@ -34,29 +32,23 @@ const ProductPage = (props) => {
   };
 
   useEffect(() => {
-    // console.log(
-    //   'Component Did Mount.... Contain blank array array as dependency... Run only once...'
-    // );
-    console.log(products);
     const getProducts = async () => {
       try {
         const products = await getJSON('https://restcountries.com/v3.1/all');
         setProducts((prevState) => {
           return (prevState = products);
         });
+        setIsLoading(!isLoading);
       } catch (err) {
         console.log(err);
       }
     };
     getProducts();
-  }, []);
+  }, [isLoading]);
 
   // useEffect(() => {
-  //   // console.log(
-  //   //   'Component Did update... Contain array with dependency... run only when there is a change in the dependency..'
-  //   // );
   //   setIsLoading(!isLoading);
-  // }, [products]);
+  // }, [products, setIsLoading]);
 
   // const showdetailsHandler = (id) => {
   //   const cProducts = [...products];
@@ -67,21 +59,23 @@ const ProductPage = (props) => {
 
   // useEffect(() => {
   //   return setProducts((prevState) => {
-  //     return (prevState = cProducts);
+  //     return (prevState = uProducts);
   //   });
-  // }, [cProducts]);
+  // }, [products]);
 
   // console.log('Render...');
+
+  console.log(products, isLoading);
 
   return (
     <div className="product-page" id={id}>
       Welcome to the {name}...
-      {/* {isLoading ? (
+      {isLoading ? (
         <p>Please wait while the products has beem loaded....</p>
       ) : (
-        <Product data={products} showdetailsHandler={showdetailsHandler} />
-      )} */}
-      <Product data={products} />
+        <Product data={products} />
+      )}
+      {/* <Product data={products} showdetailsHandler={showdetailsHandler} /> */}
     </div>
   );
 };

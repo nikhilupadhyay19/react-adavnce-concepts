@@ -6,7 +6,6 @@ const TIMEOUT = 10;
 const ProductPage = (props) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [uProducts, setUProducts] = useState([]);
 
   const { name, id } = props;
 
@@ -35,47 +34,47 @@ const ProductPage = (props) => {
     const getProducts = async () => {
       try {
         const products = await getJSON('https://restcountries.com/v3.1/all');
-        setProducts((prevState) => {
-          return (prevState = products);
-        });
-        setIsLoading(!isLoading);
+        setProducts(products);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
       }
     };
     getProducts();
-  }, [isLoading]);
+  }, []);
 
-  // useEffect(() => {
-  //   setIsLoading(!isLoading);
-  // }, [products, setIsLoading]);
+  const showdetailsHandler = (id) => {
+    const cProducts = [...products];
+    const index = cProducts.findIndex((el) => el.cca3 === id);
+    cProducts.splice(index, 1);
+    setProducts(cProducts);
+  };
 
-  // const showdetailsHandler = (id) => {
-  //   const cProducts = [...products];
-  //   const index = cProducts.findIndex((el) => el.cca3 === id);
-  //   cProducts.splice(index, 1);
-  //   setUProducts(cProducts);
-  // };
+  const continents = products
+    .map((el) => el.continents[0])
+    .reduce((acc, el) => {
+      if (acc.indexOf(el) === -1) {
+        acc.push(el);
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => {
+      const x = a.toLowerCase();
+      const y = b.toLowerCase();
+      if (x > y) return 1;
+      if (x < y) return -1;
+      return 0;
+    });
 
-  // useEffect(() => {
-  //   return setProducts((prevState) => {
-  //     return (prevState = uProducts);
-  //   });
-  // }, [products]);
-
-  // console.log('Render...');
-
-  console.log(products, isLoading);
-
+  console.log(continents);
   return (
     <div className="product-page" id={id}>
-      Welcome to the {name}...
+      <h1>Welcome to the {name}...</h1>
       {isLoading ? (
         <p>Please wait while the products has beem loaded....</p>
       ) : (
-        <Product data={products} />
+        <Product data={products} showdetailsHandler={showdetailsHandler} />
       )}
-      {/* <Product data={products} showdetailsHandler={showdetailsHandler} /> */}
     </div>
   );
 };

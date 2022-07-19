@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Product = (props) => {
-  const { data: products } = props;
+  const { data: products, deleteProductHandler } = props;
   return (
     <div className="row">
       {products.map((el, index) => (

@@ -23,16 +23,16 @@ const ProductPage = (props) => {
   const [error, setError] = useState(null);
 
   // States for search field...
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchPram, setSearchPram] = useState('');
 
   // State for select field...
-  const [selectQuery, setSelectQuery] = useState('');
+  const [selectPram, setSelectPram] = useState('All');
 
   // Props
   const { name, id, className } = props;
 
   // const [isLoading, setIsLoading] = useState(true);
-  // const [selectQuery, setSelectQuery] = useState('Select Country Region...');
+  // const [selectPram, setSelectPram] = useState('Select Country Region...');
 
   // const { name, id } = props;
 
@@ -99,22 +99,22 @@ const ProductPage = (props) => {
 
   // const selectChangeHandler = (e) => {
   //   const query = e.target.value;
-  //   setSelectQuery(query);
+  //   setSelectPram(query);
   // };
 
   // useEffect(() => {
-  //   console.log(selectQuery);
+  //   console.log(selectPram);
   //   const cProducts = [...products];
-  //   if (selectQuery === 'Select Country Region...') {
+  //   if (selectPram === 'Select Country Region...') {
   //     fProducts = cProducts;
   //     console.log(fProducts);
   //   } else {
   //     const fProducts = cProducts.filter(
-  //       (el) => el.continents[0] === selectQuery
+  //       (el) => el.continents[0] === selectPram
   //     );
   //     console.log(fProducts);
   //   }
-  // }, [selectQuery]);
+  // }, [selectPram]);
 
   // const cProducts = [...products];
 
@@ -134,24 +134,40 @@ const ProductPage = (props) => {
 
   // Event handlers...
   const searchItemsHandler = (e) => {
-    setSearchQuery(e.target.value);
+    setSearchPram(e.target.value);
   };
 
   const selectChangeHandler = (e) => {
-    setSelectQuery(e.target.value);
+    setSelectPram(e.target.value);
+  };
+
+  // Now I have communicated from child to parent. As I have get the id from product component based on which i have to filter data inside product page component...
+  const deleteProductHandler = (id) => {
+    const cItems = [...items];
+    const index = cItems.findIndex((el) => el.cca3 === id);
+    cItems.splice(index, 1);
+    setItems(cItems);
   };
 
   // custom functions that needs to be rendered on state change...
-  const filteredItems = () => {
-    const fItems = items.filter(
-      (el) =>
-        el.name.common.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
-    );
-    return fItems;
+  const fItems = () => {
+    return items.filter((el) => {
+      if (el.continents[0] === selectPram) {
+        return (
+          el.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
+            -1 && el.continents[0] === selectPram
+        );
+      } else if (selectPram === 'All') {
+        return (
+          el.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !== -1
+        );
+      }
+    });
   };
 
   // Keep in mind. Do not mutate the orginal data...
-  const products = [...items];
+  // const products = [...items];
+  console.log(items);
 
   // Conditional return...
   if (error) {
@@ -184,7 +200,10 @@ const ProductPage = (props) => {
               />
             </div>
           </div>
-          <Product data={filteredItems()} />
+          <Product
+            data={fItems()}
+            deleteProductHandler={deleteProductHandler}
+          />
         </div>
       </div>
     );

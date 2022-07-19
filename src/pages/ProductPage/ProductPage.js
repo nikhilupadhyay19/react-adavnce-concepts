@@ -28,8 +28,6 @@ const ProductPage = (props) => {
   // States for search field...
   const [searchPram, setSearchPram] = useState('');
 
-  const [searchPram2, setSearchPram2] = useState(['capital']);
-
   // State for select field...
   const [selectPram, setSelectPram] = useState('All');
 

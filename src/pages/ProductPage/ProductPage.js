@@ -28,6 +28,8 @@ const ProductPage = (props) => {
   // States for search field...
   const [searchPram, setSearchPram] = useState('');
 
+  const [searchPram2, setSearchPram2] = useState(['capital']);
+
   // State for select field...
   const [selectPram, setSelectPram] = useState('All');
 
@@ -97,15 +99,16 @@ const ProductPage = (props) => {
 
   // custom functions that needs to be rendered on state change...
   const fItems = () => {
-    return items.filter((el) => {
-      if (el.continents[0] === selectPram) {
+    return items.filter((item) => {
+      if (item.continents[0] === selectPram) {
         return (
-          el.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
-            -1 && el.continents[0] === selectPram
+          item.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
+            -1 && item.continents[0] === selectPram
         );
       } else if (selectPram === 'All') {
         return (
-          el.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !== -1
+          item.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
+          -1
         );
       }
     });

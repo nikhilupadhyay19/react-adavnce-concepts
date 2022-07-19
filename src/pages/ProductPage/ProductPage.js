@@ -31,11 +31,6 @@ const ProductPage = (props) => {
   // Props
   const { name, id, className } = props;
 
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [selectPram, setSelectPram] = useState('Select Country Region...');
-
-  // const { name, id } = props;
-
   const timeout = (s) => {
     return new Promise((_, reject) => {
       setTimeout(() => {
@@ -71,13 +66,6 @@ const ProductPage = (props) => {
     getItems();
   }, []);
 
-  // const deleteProductHandler = (id) => {
-  //   const cProducts = [...products];
-  //   const index = cProducts.findIndex((el) => el.cca3 === id);
-  //   cProducts.splice(index, 1);
-  //   setProducts(cProducts);
-  // };
-
   // const pRegions = products
   //   .map((el) => el.continents[0])
   //   .reduce((acc, el) => {
@@ -94,43 +82,6 @@ const ProductPage = (props) => {
   //     return 0;
   //   });
   // pRegions.unshift('Select Country Region...');
-
-  // console.log(pRegions);
-
-  // const selectChangeHandler = (e) => {
-  //   const query = e.target.value;
-  //   setSelectPram(query);
-  // };
-
-  // useEffect(() => {
-  //   console.log(selectPram);
-  //   const cProducts = [...products];
-  //   if (selectPram === 'Select Country Region...') {
-  //     fProducts = cProducts;
-  //     console.log(fProducts);
-  //   } else {
-  //     const fProducts = cProducts.filter(
-  //       (el) => el.continents[0] === selectPram
-  //     );
-  //     console.log(fProducts);
-  //   }
-  // }, [selectPram]);
-
-  // const cProducts = [...products];
-
-  // console.log(`Filtered Products ::: ${fProducts}`);
-
-  // return (
-  //   // <div className="product-page" id={id}>
-  //   //   <h1>Welcome to the {name}...</h1>
-  //   //   <SelectBox data={regions} selectChangeHandler={selectChangeHandler} />
-  //   //   {isLoading ? (
-  //   //     <p>Please wait while the products has beem loaded....</p>
-  //   //   ) : (
-  //   //     <Product data={fProducts} deleteProductHandler={deleteProductHandler} />
-  //   //   )}
-  //   // </div>
-  // );
 
   // Event handlers...
   const searchItemsHandler = (e) => {
@@ -167,7 +118,7 @@ const ProductPage = (props) => {
 
   // Keep in mind. Do not mutate the orginal data...
   // const products = [...items];
-  console.log(items);
+  // console.log(items);
 
   // Conditional return...
   if (error) {

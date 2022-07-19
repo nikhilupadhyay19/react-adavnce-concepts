@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ProductPage.scss';
 import Product from '../../components/Product/Product';
 import { SearchBox } from '../../components/SearchBox/SearchBox';
 import { SelectBox } from '../../components/SelectBox/SelectBox';
@@ -138,23 +139,19 @@ const ProductPage = (props) => {
   } else {
     return (
       <div id={id} className={className}>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-lg-12">
-              <h1>Welcome to the {name}...</h1>
-            </div>
-          </div>
-        </div>
         <div className="container">
+          <div className="col-lg-12 mb-3">
+            <h1>{name} loaded...</h1>
+          </div>
           <div className="col-lg-12">
-            <div className="row">
-              <div className="col-lg-6">
+            <div className="row justify-content-between">
+              <div className="col-lg-3 mb-5">
                 <SelectBox
                   data={regions}
                   selectChangeHandler={selectChangeHandler}
                 />
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-3 mb-5">
                 <SearchBox
                   className="search-box-countries"
                   htmlFor="Countries Search"

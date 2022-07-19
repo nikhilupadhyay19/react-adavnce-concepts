@@ -6,6 +6,28 @@
 }
 .card {
   height: 100%;
+  border: none;
+  .card-body {
+    position: relative;
+    .card-title {
+      color: #1e49e2;
+      padding-right: 30px;
+      font-size: 18px;
+      margin: 0;
+      span {
+        color: #0c233c;
+        font-size: 14px;
+      }
+    }
+    i {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      padding: 3px;
+      line-height: 1;
+      color: red;
+    }
+  }
 }
 .flag-img {
   object-fit: fill;
@@ -13,27 +35,7 @@
 }
 .list-group-flush > .list-group-item {
   border-width: 0;
-  padding: 0 1rem;
-  i {
-    font-size: 22px;
-    vertical-align: bottom;
-    margin-right: 5px;
-    color: #1e49e2;
-  }
-}
-
-.card-body {
-  .card-title {
-    color: #510dbc;
-    span {
-      color: #0c233c;
-      font-size: 16px;
-    }
-  }
-  button {
-    display: block;
-    text-align: center;
-    width: 100%;
-    margin-top: 15px;
-  }
+  padding: 0.3rem 1rem;
+  font-size: 14px;
+  color: #0c233c;
 }

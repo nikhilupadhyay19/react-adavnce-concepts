@@ -5,9 +5,9 @@ export const SearchBox = (props) => {
 
   return (
     <div className={`search-box ${className}`}>
-      <label htmlFor={htmlFor} className="form-label">
+      {/* <label htmlFor={htmlFor} className="form-label">
         {label}
-      </label>
+      </label> */}
       <input
         className="form-control"
         placeholder={placeholder}

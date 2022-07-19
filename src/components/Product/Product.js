@@ -8,24 +8,28 @@ const Product = (props) => {
       {products.map((el, index) => (
         <div className="col-lg-3 mb-20" key={el.cca3}>
           <div className="card shadow-sm bg-body rounded">
-            <img src={el.flags.png} alt={el.name.common} className="flag-img" />
+            {/* <img src={el.flags.png} alt={el.name.common} className="flag-img" /> */}
             <div className="card-body">
               <h5 className="card-title">
                 <span>{index}</span> : {el.name.common}
               </h5>
+              <i
+                className="icofont icofont-ui-delete v-tb"
+                onClick={() => deleteProductHandler(el.cca3)}
+              ></i>
             </div>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                <i class="icofont icofont-globe"></i>
-                {el.region}
+                Region:
+                <strong> {el.region}</strong>
               </li>
               <li className="list-group-item">
-                <i class="icofont icofont-building-alt"></i>
-                {el.capital}
+                Capital:
+                <strong> {el.capital}</strong>
               </li>
               <li className="list-group-item">
-                <i class="icofont icofont-users-social"></i>
-                {el.population}
+                Population:
+                <strong> {el.population}</strong>
               </li>
             </ul>
             <div className="card-body">
@@ -35,13 +39,6 @@ const Product = (props) => {
                 value={el.name.common}
                 onChange={(e) => changeNameHandler(e, el.cca3)}
               />
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => deleteProductHandler(el.cca3)}
-              >
-                <i className="icofont icofont-ui-delete v-tb"></i>
-              </button>
             </div>
           </div>
         </div>

@@ -22,6 +22,8 @@ const ProductPage = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
 
+  console.log(items);
+
   // States for search field...
   const [searchPram, setSearchPram] = useState('');
 
@@ -92,14 +94,6 @@ const ProductPage = (props) => {
     setSelectPram(e.target.value);
   };
 
-  // Now I have communicated from child to parent. As I have get the id from product component based on which i have to filter data inside product page component...
-  const deleteProductHandler = (id) => {
-    const cItems = [...items];
-    const index = cItems.findIndex((el) => el.cca3 === id);
-    cItems.splice(index, 1);
-    setItems(cItems);
-  };
-
   // custom functions that needs to be rendered on state change...
   const fItems = () => {
     return items.filter((el) => {
@@ -116,9 +110,25 @@ const ProductPage = (props) => {
     });
   };
 
-  // Keep in mind. Do not mutate the orginal data...
-  // const products = [...items];
-  // console.log(items);
+  // Now I have communicated from child to parent. As I have get the id from product component based on which i have to filter data inside product page component...
+  const deleteProductHandler = (id) => {
+    const cItems = [...items];
+    const index = cItems.findIndex((el) => el.cca3 === id);
+    cItems.splice(index, 1);
+    setItems(cItems);
+  };
+
+  const changeNameHandler = (e, id) => {
+    const cItems = [...items];
+    const index = cItems.findIndex((el) => el.cca3 === id);
+
+    const item = Object.assign({}, cItems[index]);
+    item.name.common = e.target.value;
+    cItems[index] = item;
+
+    setItems(cItems);
+  };
+  ////////////////////////////////////////////////////////////
 
   // Conditional return...
   if (error) {
@@ -134,26 +144,31 @@ const ProductPage = (props) => {
               <h1>Welcome to the {name}...</h1>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-6">
-              <SelectBox
-                data={regions}
-                selectChangeHandler={selectChangeHandler}
-              />
-            </div>
-            <div className="col-lg-6">
-              <SearchBox
-                className="search-box-countries"
-                htmlFor="Countries Search"
-                label="Search countries here..."
-                placeholder="Search Countries"
-                searchItemsHandler={searchItemsHandler}
-              />
+        </div>
+        <div className="container">
+          <div className="col-lg-12">
+            <div className="row">
+              <div className="col-lg-6">
+                <SelectBox
+                  data={regions}
+                  selectChangeHandler={selectChangeHandler}
+                />
+              </div>
+              <div className="col-lg-6">
+                <SearchBox
+                  className="search-box-countries"
+                  htmlFor="Countries Search"
+                  label="Search countries here..."
+                  placeholder="Search Countries"
+                  searchItemsHandler={searchItemsHandler}
+                />
+              </div>
             </div>
           </div>
           <Product
             data={fItems()}
             deleteProductHandler={deleteProductHandler}
+            changeNameHandler={changeNameHandler}
           />
         </div>
       </div>

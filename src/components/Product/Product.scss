@@ -1,0 +1,39 @@
+.v-tb {
+  vertical-align: text-bottom;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.card {
+  height: 100%;
+}
+.flag-img {
+  object-fit: fill;
+  height: 150px;
+}
+.list-group-flush > .list-group-item {
+  border-width: 0;
+  padding: 0 1rem;
+  i {
+    font-size: 22px;
+    vertical-align: bottom;
+    margin-right: 5px;
+    color: #1e49e2;
+  }
+}
+
+.card-body {
+  .card-title {
+    color: #510dbc;
+    span {
+      color: #0c233c;
+      font-size: 16px;
+    }
+  }
+  button {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+  }
+}

@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import Product from '../../components/Product/Product';
 import { SearchBox } from '../../components/SearchBox/SearchBox';
-// import { SelectBox } from '../../components/SelectBox/SelectBox';
+import { SelectBox } from '../../components/SelectBox/SelectBox';
 
 const TIMEOUT = 10;
 
-// const regions = [
-//   'Select Country Region...',
-//   'Africa',
-//   'Antarctica',
-//   'Asia',
-//   'Europe',
-//   'North America',
-//   'Oceania',
-//   'South America',
-// ];
+const regions = [
+  'All',
+  'Africa',
+  'Antarctica',
+  'Asia',
+  'Europe',
+  'North America',
+  'Oceania',
+  'South America',
+];
 
 const ProductPage = (props) => {
   // States for data loading and error handling...
   const [items, setItems] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  //
+
+  // States for search field...
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // State for select field...
+  const [selectQuery, setSelectQuery] = useState('');
 
   // Props
   const { name, id, className } = props;
-  //
 
   // const [isLoading, setIsLoading] = useState(true);
   // const [selectQuery, setSelectQuery] = useState('Select Country Region...');
@@ -128,9 +132,28 @@ const ProductPage = (props) => {
   //   // </div>
   // );
 
-  const products = [...items];
-  // Conditional return...
+  // Event handlers...
+  const searchItemsHandler = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
+  const selectChangeHandler = (e) => {
+    setSelectQuery(e.target.value);
+  };
+
+  // custom functions that needs to be rendered on state change...
+  const filteredItems = () => {
+    const fItems = items.filter(
+      (el) =>
+        el.name.common.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
+    );
+    return fItems;
+  };
+
+  // Keep in mind. Do not mutate the orginal data...
+  const products = [...items];
+
+  // Conditional return...
   if (error) {
     return <p>{error}</p>;
   } else if (!isLoaded) {
@@ -145,17 +168,23 @@ const ProductPage = (props) => {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-6"></div>
+            <div className="col-lg-6">
+              <SelectBox
+                data={regions}
+                selectChangeHandler={selectChangeHandler}
+              />
+            </div>
             <div className="col-lg-6">
               <SearchBox
                 className="search-box-countries"
                 htmlFor="Countries Search"
                 label="Search countries here..."
                 placeholder="Search Countries"
+                searchItemsHandler={searchItemsHandler}
               />
             </div>
           </div>
-          <Product data={products} />
+          <Product data={filteredItems()} />
         </div>
       </div>
     );

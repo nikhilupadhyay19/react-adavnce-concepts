@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductPage from './pages/ProductPage/ProductPage';
+// import { CustomFn } from './CustomFn/CustomFn';
 import './style.css';
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
         id="productPage"
         className="product-page"
       />
+      {/* <CustomFn /> */}
     </div>
   );
 }

@@ -1,8 +1,6 @@
-import React from 'https://cdn.skypack.dev/react@17.0.1';
-import ReactDOM from 'https://cdn.skypack.dev/react-dom@17.0.1';
-import { useState, useEffect } from 'https://cdn.skypack.dev/react';
+import React, { useState, useEffect } from 'react';
 
-function App() {
+export function CustomFn() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -11,7 +9,7 @@ function App() {
   const [filterParam, setFilterParam] = useState(['All']);
 
   useEffect(() => {
-    fetch('https://restcountries.eu/rest/v2/all')
+    fetch('https://restcountries.com/v3.1/all')
       .then((res) => res.json())
       .then(
         (result) => {
@@ -44,17 +42,7 @@ function App() {
   }
 
   if (error) {
-    return (
-      <p>
-        {error.message}, if you get this error, the free API I used might have
-        stopped working, but I created a simple example that demonstrate how
-        this works,{' '}
-        <a href="https://codepen.io/Spruce_khalifa/pen/mdXEVKq">
-          {' '}
-          check it out{' '}
-        </a>{' '}
-      </p>
-    );
+    return <p>{error.message}</p>;
   } else if (!isLoaded) {
     return <>loading...</>;
   } else {
@@ -121,5 +109,3 @@ function App() {
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));

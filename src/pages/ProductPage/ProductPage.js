@@ -3,8 +3,6 @@ import './ProductPage.scss';
 import Product from '../../components/Product/Product';
 import { SearchBox } from '../../components/SearchBox/SearchBox';
 import { SelectBox } from '../../components/SelectBox/SelectBox';
-import ProductModal from '../../components/ProductModal/ProductModal';
-console.log(ProductModal);
 
 const TIMEOUT = 10;
 
@@ -147,7 +145,6 @@ const ProductPage = (props) => {
         <div className="container">
           <div className="col-lg-12 mb-3">
             <h1>{name} loaded...</h1>
-            <ProductModal />
           </div>
           <div className="col-lg-12">
             <div className="row justify-content-between">

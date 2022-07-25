@@ -20,17 +20,25 @@ const regions = [
 
 const ProductPage = (props) => {
   // States for data loading and error handling...
-  const [items, setItems] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
-
-  console.log(items);
+  // const [items, setItems] = useState([]);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const [error, setError] = useState(null);
+  // console.log(items);
 
   // States for search field...
-  const [searchPram, setSearchPram] = useState('');
+  // const [searchPram, setSearchPram] = useState('');
 
   // State for select field...
-  const [selectPram, setSelectPram] = useState('All');
+  // const [selectPram, setSelectPram] = useState('All');
+
+  const [state, setState] = useState({
+    items: [],
+    isLoaded: false,
+    error: null,
+    searchPram: '',
+    selectPram: 'All',
+  });
+  console.log(state);
 
   // State for Modal
 
@@ -63,8 +71,11 @@ const ProductPage = (props) => {
       try {
         const data = await getJSON('https://restcountries.com/v3.1/all');
         const items = [...data];
-        setItems(items);
-        setIsLoaded(true);
+        setState((prevSate) => {
+          return { ...prevSate, items: items, isLoaded: true };
+        });
+        // setItems(items);
+        // setIsLoaded(true);
       } catch (err) {
         setError(err);
       }
@@ -91,25 +102,34 @@ const ProductPage = (props) => {
 
   // Event handlers...
   const searchItemsHandler = (e) => {
-    setSearchPram(e.target.value);
+    // setSearchPram(e.target.value);
+    setState((prevState) => {
+      return { ...prevState, searchPram: e.target.value };
+    });
   };
 
   const selectChangeHandler = (e) => {
-    setSelectPram(e.target.value);
+    // setSelectPram(e.target.value);
+    setState((prevSate) => {
+      return { ...prevSate, selectPram: e.target.value };
+    });
   };
 
   // custom functions that needs to be rendered on state change...
   const fItems = () => {
-    return items.filter((item) => {
-      if (item.continents[0] === selectPram) {
+    return state.items.filter((item) => {
+      if (item.continents[0] === state.selectPram) {
         return (
-          item.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
-            -1 && item.continents[0] === selectPram
+          item.name.common
+            .toLowerCase()
+            .indexOf(state.searchPram.toLowerCase()) !== -1 &&
+          item.continents[0] === state.selectPram
         );
-      } else if (selectPram === 'All') {
+      } else if (state.selectPram === 'All') {
         return (
-          item.name.common.toLowerCase().indexOf(searchPram.toLowerCase()) !==
-          -1
+          item.name.common
+            .toLowerCase()
+            .indexOf(state.searchPram.toLowerCase()) !== -1
         );
       }
     });
@@ -117,28 +137,34 @@ const ProductPage = (props) => {
 
   // Now I have communicated from child to parent. As I have get the id from product component based on which i have to filter data inside product page component...
   const deleteProductHandler = (id) => {
-    const cItems = [...items];
+    const cItems = [...state.items];
     const index = cItems.findIndex((el) => el.cca3 === id);
     cItems.splice(index, 1);
-    setItems(cItems);
+    // setItems(cItems);
+    setState((prevSate) => {
+      return { ...prevSate, items: cItems };
+    });
   };
 
   const changeNameHandler = (e, id) => {
-    const cItems = [...items];
+    const cItems = [...state.items];
     const index = cItems.findIndex((el) => el.cca3 === id);
 
     const item = Object.assign({}, cItems[index]);
     item.name.common = e.target.value;
     cItems[index] = item;
 
-    setItems(cItems);
+    // setItems(cItems);
+    setState((prevSate) => {
+      return { ...prevSate, items: cItems };
+    });
   };
   ////////////////////////////////////////////////////////////
 
   // Conditional return...
-  if (error) {
+  if (state.error) {
     return <p>{error}</p>;
-  } else if (!isLoaded) {
+  } else if (!state.isLoaded) {
     return (
       <div>
         <p>Please wait while the items has been loaded...</p>

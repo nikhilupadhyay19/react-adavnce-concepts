@@ -18,17 +18,37 @@ const regions = [
   'South America',
 ];
 
+// const pRegions = products
+//   .map((el) => el.continents[0])
+//   .reduce((acc, el) => {
+//     if (acc.indexOf(el) === -1) {
+//       acc.push(el);
+//     }
+//     return acc;
+//   }, [])
+//   .sort((a, b) => {
+//     const x = a.toLowerCase();
+//     const y = b.toLowerCase();
+//     if (x > y) return 1;
+//     if (x < y) return -1;
+//     return 0;
+//   });
+// pRegions.unshift('Select Country Region...');
+
 const ProductPage = (props) => {
   // States for data loading and error handling...
+
   // const [items, setItems] = useState([]);
   // const [isLoaded, setIsLoaded] = useState(false);
   // const [error, setError] = useState(null);
   // console.log(items);
 
   // States for search field...
+
   // const [searchPram, setSearchPram] = useState('');
 
   // State for select field...
+
   // const [selectPram, setSelectPram] = useState('All');
 
   const [state, setState] = useState({
@@ -82,23 +102,6 @@ const ProductPage = (props) => {
     };
     getItems();
   }, []);
-
-  // const pRegions = products
-  //   .map((el) => el.continents[0])
-  //   .reduce((acc, el) => {
-  //     if (acc.indexOf(el) === -1) {
-  //       acc.push(el);
-  //     }
-  //     return acc;
-  //   }, [])
-  //   .sort((a, b) => {
-  //     const x = a.toLowerCase();
-  //     const y = b.toLowerCase();
-  //     if (x > y) return 1;
-  //     if (x < y) return -1;
-  //     return 0;
-  //   });
-  // pRegions.unshift('Select Country Region...');
 
   // Event handlers...
   const searchItemsHandler = (e) => {

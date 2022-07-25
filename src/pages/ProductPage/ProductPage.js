@@ -3,6 +3,7 @@ import './ProductPage.scss';
 import Product from '../../components/Product/Product';
 import { SearchBox } from '../../components/SearchBox/SearchBox';
 import { SelectBox } from '../../components/SelectBox/SelectBox';
+import { Spinner } from 'reactstrap';
 
 const TIMEOUT = 10;
 
@@ -138,7 +139,14 @@ const ProductPage = (props) => {
   if (error) {
     return <p>{error}</p>;
   } else if (!isLoaded) {
-    return <p>Please wait while the items has been loaded...</p>;
+    return (
+      <div>
+        <p>Please wait while the items has been loaded...</p>
+        <Spinner className="m-5" color="primary">
+          Loading...
+        </Spinner>
+      </div>
+    );
   } else {
     return (
       <div id={id} className={className}>
